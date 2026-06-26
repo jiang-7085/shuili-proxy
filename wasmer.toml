@@ -1,18 +1,9 @@
 [package]
 id = "shuili-proxy"
 version = "1.0.0"
+name = "水利智审云端API代理"
 
-[command]
-build = "pip install -r requirements.txt"
-start = "uvicorn proxy_server:app --host 0.0.0.0 --port $PORT"
-
-[[command.install]]
-commands = [
-    "pip install --upgrade pip"
-]
-
-[command.environment]
-# Variables can also be set in the Wasmer dashboard
-# TEXT_API_KEY = ""
-# VISION_API_KEY = ""
-# ADMIN_TOKEN = ""
+[[command]]
+name = "proxy"
+build = ["pip install -r requirements.txt"]
+start = ["uvicorn app:app --host 0.0.0.0 --port $PORT"]
