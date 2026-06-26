@@ -246,7 +246,9 @@ async def startup():
 class RegisterRequest(BaseModel):
     device_name: Optional[str] = ""
     version: Optional[str] = ""
-
+@app.get("/")
+async def root():
+    return {"status": "ok", "service": "水利智审云端API代理", "version": "1.0"}
 @app.post("/api/device/register")
 async def register_device(req: RegisterRequest):
     """设备首次注册"""
