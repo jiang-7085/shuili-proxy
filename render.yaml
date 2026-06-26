@@ -1,0 +1,30 @@
+# Render 部署配置
+# https://render.com/docs/deploy?language=python
+
+services:
+  - type: web
+    name: shuili-proxy
+    env: python
+    region: singapore  # 可选：singapore, oregon, frankfurt 等
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn proxy_server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      # 以下环境变量可选，首次部署后建议通过 Render Dashboard 设置
+      # - key: TEXT_API_BASE_URL
+      #   value: "https://api.deepseek.com"
+      # - key: TEXT_API_KEY
+      #   value: "your-deepseek-api-key"
+      # - key: TEXT_MODEL
+      #   value: "deepseek-chat"
+      # - key: VISION_API_BASE_URL
+      #   value: "https://dashscope.aliyuncs.com/compatible-mode"
+      # - key: VISION_API_KEY
+      #   value: "your-aliyun-api-key"
+      # - key: VISION_MODEL
+      #   value: "qwen-vl-plus"
+      # - key: ADMIN_TOKEN
+      #   value: "your-custom-admin-token"
